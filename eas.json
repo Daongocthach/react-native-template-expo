@@ -1,0 +1,21 @@
+{
+  "cli": {
+    "version": ">= 15.0.10",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "production": {
+      "ios": {
+        "distribution": "internal",
+        "credentialsSource": "remote"
+      },
+      "android": {
+        "distribution": "internal",
+        "credentialsSource": "remote"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
