@@ -43,7 +43,11 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18next}>
           <Toast />
-          <Stack />
+          <Stack initialRouteName="(drawer)" >
+            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+            <Stack.Screen name="login" options={{ headerShown: false }} />
+            <Stack.Screen name="sign-up" options={{ headerShown: false }} />
+          </Stack>
         </I18nextProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

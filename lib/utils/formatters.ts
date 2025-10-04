@@ -45,3 +45,12 @@ export const formatTime = (input: string | Date | number): string => {
 
   return `${dd}/${mm}/${yyyy} ${hh}:${min}:${ss}`
 }
+
+export function formatPathToTitle(path: string): string {
+  if (!path) return ''
+  const lastPart = path.split('/').filter(Boolean).pop() || ''
+  return lastPart
+    .split('-')
+    .map(word => word.charAt(0) + word.slice(1))
+    .join(' ')
+}
