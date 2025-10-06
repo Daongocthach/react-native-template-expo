@@ -2,23 +2,24 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useFonts } from 'expo-font'
 import { Stack } from "expo-router"
 import * as SplashScreen from 'expo-splash-screen'
+import { useEffect } from 'react'
 import { I18nextProvider } from "react-i18next"
+import { ActivityIndicator } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 import Toast from 'react-native-toast-message'
 
-
 import { FONT_FAMILIES } from "@/lib/constants/config"
 import i18next from '@/locales'
-import { useEffect } from 'react'
-import { ActivityIndicator } from 'react-native'
-import '../global.css'
+import useStore from '@/store'
+
 
 const queryClient = new QueryClient()
 
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
+  const { isLoggedIn } = useStore()
 
   const [loaded] = useFonts({
     [FONT_FAMILIES.REGULAR]: require('../assets/fonts/Poppins-Regular.ttf'),
@@ -43,10 +44,14 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18next}>
           <Toast />
-          <Stack initialRouteName="(drawer)" >
-            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-            <Stack.Screen name="login" options={{ headerShown: false }} />
-            <Stack.Screen name="sign-up" options={{ headerShown: false }} />
+          <Stack>
+            <Stack.Protected guard={isLoggedIn} >
+              <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+            </Stack.Protected>
+            <Stack.Protected guard={!isLoggedIn} >
+              <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+              <Stack.Screen name="sign-up" options={{ headerShown: false }} />
+            </Stack.Protected>
           </Stack>
         </I18nextProvider>
       </QueryClientProvider>

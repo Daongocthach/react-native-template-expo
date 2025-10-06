@@ -1,16 +1,13 @@
 import React, { useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View, ViewStyle, ActivityIndicator } from 'react-native'
+import { ActivityIndicator, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
-import { RadioButton } from 'react-native-paper'
 
 import { useTheme } from '@/contexts/ThemeProvider'
-import { DropdownProps, FONT_FAMILIES, gaugesType, windowWidth } from '@/lib'
+import { DropdownProps, FONT_FAMILIES } from '@/lib'
 import Icon from './Icon'
 import RowComponent from './RowComponent'
 import TextComponent from './TextComponent'
-import ImageComponent from './ImageComponent'
-import ColumnComponent from './ColumnComponent'
 
 interface InlineDropdownProps {
   selects: { label: string, value: string | number }[]
@@ -134,50 +131,6 @@ const InlineDropdown = ({
             )}
             renderItem={(item) => {
               const isSelected = item.value === safeValue
-
-              if (isGaugeItem) {
-                return (
-                  <RowComponent
-                    style={{
-                      backgroundColor: isSelected ? colors.surface : 'transparent',
-                      paddingRight: 8,
-                      paddingVertical: 16,
-                    }}
-                    gap={10}
-                    onPress={() => {
-                      setSelect(item.value)
-                      dropdownRef.current?.close()
-                    }}
-                  >
-                    <RowComponent>
-                      <RadioButton.Android
-                        value={item?.value}
-                        status={isSelected ? 'checked' : 'unchecked'}
-                        color={colors.primary}
-                        uncheckedColor={colors.primary}
-                        onPress={() => setSelect(item.value)}
-                      />
-                      <ImageComponent
-                        source={gaugesType[item?.value]?.image}
-                        style={{ width: 80, height: 80, borderRadius: 8 }}
-                        resizeMode="cover"
-                      />
-                    </RowComponent>
-                    <ColumnComponent>
-                      <TextComponent
-                        text={t(gaugesType[item?.value]?.title)}
-                        color={isSelected ? "primary" : "onBackground"}
-                      />
-                      <TextComponent
-                        size={12}
-                        color="onSurface"
-                        style={{ maxWidth: windowWidth * 0.5 }}
-                        text={gaugesType[item?.value]?.detail}
-                      />
-                    </ColumnComponent>
-                  </RowComponent>
-                )
-              }
 
               return (
                 <RowComponent

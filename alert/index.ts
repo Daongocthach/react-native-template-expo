@@ -1,7 +1,7 @@
-import Toast from "react-native-toast-message"
-import { toastList, ToastType } from "@/notification/toastList"
-import { alertList, AlertType } from "@/notification/alertList"
+import { alertList, AlertType } from "@/alert/alertList"
+import { toastList, ToastType } from "@/alert/toastList"
 import i18next from "@/locales"
+import Toast from "react-native-toast-message"
 import { showCustomAlert } from "./alert"
 
 export const showToast = (name: ToastType) => {

@@ -61,10 +61,17 @@ const useStore = create<StoreState>()(
 
         },
         signIn: async (payload) => {
-        
+          set({
+            isLoggedIn: true,
+          })
         },
         signOut: async () => {
-          
+          set({
+            isLoggedIn: false,
+            userData: null,
+            accessToken: "",
+            refreshToken: "",
+          })
         },
         setActionName: (key, value) => {
           set({ [key]: value })

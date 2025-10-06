@@ -1,11 +1,11 @@
-import { View, ActivityIndicator, TouchableOpacity, Platform } from 'react-native'
-import { Icon } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
+import { ActivityIndicator, Platform, TouchableOpacity, View } from 'react-native'
 
-import TextComponent from './TextComponent'
-import ModalComponent from './ModalComponent'
 import { useTheme } from '@/contexts/ThemeProvider'
 import { windowHeight, windowWidth } from '@/lib'
+import Icon from './Icon'
+import ModalComponent from './ModalComponent'
+import TextComponent from './TextComponent'
 
 export default function LoadingModal({
     title,
@@ -41,7 +41,7 @@ export default function LoadingModal({
                             padding: 5,
                         }}
                     >
-                        <Icon source="close" size={24} color="black" />
+                        <Icon name="X" size={24} color="black" />
                     </TouchableOpacity>
                 )}
                 <ActivityIndicator size={50} color={colors.primary} />

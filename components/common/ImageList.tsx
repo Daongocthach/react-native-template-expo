@@ -1,9 +1,10 @@
-import { Image, TouchableOpacity, FlatList } from 'react-native'
-import { useImageViewerModal } from './ImageViewerModal'
+import { FlatList, Image, TouchableOpacity } from 'react-native'
+
 import IMAGES from '@/assets/images'
-import TextComponent from './TextComponent'
 import ColumnComponent from './ColumnComponent'
 import ImageComponent from './ImageComponent'
+import { useImageViewerModal } from './ImageViewerModal'
+import TextComponent from './TextComponent'
 
 interface Props {
   uris: string[]
@@ -17,7 +18,7 @@ export default function ImageList({ uris = [], size = 60, label }: Props) {
   if (!uris || uris.length === 0) {
     return (
       <Image
-        source={IMAGES.NOTHING}
+        source={IMAGES.NOIMAGE}
         style={{
           width: size,
           height: size,

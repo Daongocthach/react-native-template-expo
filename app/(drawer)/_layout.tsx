@@ -1,10 +1,11 @@
 import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer"
 import { useRouter } from "expo-router"
 import { Drawer } from "expo-router/drawer"
-import { HomeIcon, icons } from 'lucide-react-native'
+import { icons } from 'lucide-react-native'
 import { useTranslation } from "react-i18next"
 import { StyleSheet } from "react-native"
 
+import { Icon } from "@/components"
 import Header from "@/components/common/Header"
 import { VERSION, VERSION_PATCH } from "@/lib"
 import useStore from "@/store"
@@ -12,10 +13,10 @@ import useStore from "@/store"
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     const { t } = useTranslation()
     const router = useRouter()
-    const { isLoggedIn, darkMode, userData, socketUrl, signOut } = useStore()
+    const { isLoggedIn, signOut } = useStore()
 
     const handleRouting = async (path: string) => {
-        if (path === "/login") {
+        if (path === "/sign-in") {
             signOut()
             return
         }
@@ -50,7 +51,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                     <DrawerItem
                         key={item.name}
                         icon={({ color, size }) => (
-                            <HomeIcon size={size} />
+                            <Icon name={item.icon} size={size} />
                         )}
                         label={t(item.label)}
                         labelStyle={[
@@ -76,12 +77,6 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
 
 
 export default function DrawerLayout() {
-    const { isLoggedIn } = useStore()
-
-    // if (!isLoggedIn) {
-    //     return <Redirect href="/login" />
-    // }
-
     return (
         <Drawer
             drawerContent={(props) => <CustomDrawerContent {...props} />}

@@ -1,10 +1,9 @@
-import { TouchableOpacity, View } from 'react-native'
-import { useEffect } from 'react'
-import * as ScreenOrientation from 'expo-screen-orientation'
-import Video from 'react-native-video'
 import Icon from '@/components/common/Icon'
+import * as ScreenOrientation from 'expo-screen-orientation'
+import { useEffect } from 'react'
+import { TouchableOpacity, View } from 'react-native'
+import Video from 'react-native-video'
 import ModalComponent from './ModalComponent'
-import { Portal } from 'react-native-paper'
 
 
 interface VideoViewerProps {
@@ -23,7 +22,6 @@ export default function VideoViewer({ uri, onClose }: VideoViewerProps) {
   }, [uri])
 
   return (
-    <Portal>
       <ModalComponent visible={!!uri} transparent animationType="slide">
         <View style={{
           justifyContent: 'center',
@@ -49,6 +47,5 @@ export default function VideoViewer({ uri, onClose }: VideoViewerProps) {
           </TouchableOpacity>
         </View>
       </ModalComponent>
-    </Portal>
   )
 }
